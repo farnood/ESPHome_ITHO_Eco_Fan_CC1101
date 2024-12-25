@@ -3,12 +3,13 @@
  */
 
 #include "CC1101.h"
+#include <Arduino.h>
 
 // default constructor
 CC1101::CC1101()
 {
 	SPI.begin();
-#ifdef ESP8266
+#ifdef ESP32
 	pinMode(SS, OUTPUT);
 #endif
 } //CC1101
