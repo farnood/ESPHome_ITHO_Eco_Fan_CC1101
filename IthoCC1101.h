@@ -6,6 +6,7 @@
 #define __ITHOCC1101_H__
 
 #include <stdio.h>
+#include <Arduino.h>
 #include "CC1101.h"
 #include "IthoPacket.h"
 
@@ -105,8 +106,8 @@ class IthoCC1101 : protected CC1101
 		uint8_t getLastInCounter() { return inIthoPacket.counter; }						//retrieve last received/parsed command from remote
 		uint8_t ReadRSSI();
 		bool checkID(const uint8_t *id);
-		String getLastIDstr(bool ashex=true);
-		String getLastMessage2str(bool ashex=true);
+		std::string getLastIDstr(bool ashex=true);
+		std::string getLastMessage2str(bool ashex=true);
 
 
 		//send
