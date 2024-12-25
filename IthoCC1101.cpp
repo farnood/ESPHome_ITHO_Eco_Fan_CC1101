@@ -986,8 +986,8 @@ bool IthoCC1101::checkID(const uint8_t *id)
 	return true;
 }
 
-String IthoCC1101::getLastIDstr(bool ashex) {
-	String str;
+std::string IthoCC1101::getLastIDstr(bool ashex) {
+	std::string str;
 	for (uint8_t i=0; i<8;i++) {
 		if (ashex) str += String(inIthoPacket.deviceId2[i], HEX);
 		else str += String(inIthoPacket.deviceId2[i]);
@@ -996,8 +996,8 @@ String IthoCC1101::getLastIDstr(bool ashex) {
 	return str;
 }
 
-String IthoCC1101::getLastMessage2str(bool ashex) {
-    String str = "Length="+ String(inMessage2.length) + ".";
+std::string IthoCC1101::getLastMessage2str(bool ashex) {
+    std::string str = "Length="+ String(inMessage2.length) + ".";
     for (uint8_t i=0; i<inMessage2.length;i++) {
         if (ashex) str += String(inMessage2.data[i], HEX);
         else str += String(inMessage2.data[i]);
