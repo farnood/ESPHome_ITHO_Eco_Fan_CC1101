@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <Arduino.h>
+#include <string>
 #include "CC1101.h"
 #include "IthoPacket.h"
 

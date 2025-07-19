@@ -1,5 +1,5 @@
 # ESPHome ITHO CVE ECO-FAN 2 control
-Library for NodeMCU ESP8266 in combination with Hassio Home Assistant ESPHome ITHO Eco Fan CC1101
+Library for NodeMCU ESP8266 **or ESP32** in combination with Hassio Home Assistant ESPHome ITHO Eco Fan CC1101
 Code is optimized for Itho CVE Eco-fan 2. For newer fans, please see the IthoCC1101.cpp file and search for "> 2011" and make the changes as described.
 
 
@@ -12,7 +12,7 @@ Trying to get ESPHome to mimic what is comprised in
 ## Wiring schema used:
 
 ```
-Connections between the CC1101 and the ESP8266 or Arduino:
+Connections between the CC1101 and the ESP8266, ESP32 or Arduino:
 CC11xx pins    ESP pins Arduino pins  Description
 *  1 - VCC        VCC      VCC           3v3
 *  2 - GND        GND      GND           Ground
@@ -26,7 +26,7 @@ CC11xx pins    ESP pins Arduino pins  Description
 
 
 ### Software used
-Install the ESPHome addon for Home Assistant. I like to use the program ESPHome flasher on my laptop for flashing the firmware on my NodeMCU.
+Install the ESPHome addon for Home Assistant. I like to use the program ESPHome flasher on my laptop for flashing the firmware on my ESP board (ESP8266 or ESP32).
 
 ## Prepairing your Home Assistant for the ITHO controller
 Open your `configuration.yaml` file and insert the following lines of code: (I like to put this code into fans.yaml and insert `fan: !include fans.yaml` in my configuration.yaml file)
@@ -59,15 +59,15 @@ fan:
 ```
 
 ## ESPHome Configuration
-I created a new device in Home Assistant ESPHome addon (named itho_eco_fan), and choose platform "ESP8266" and board "nodemcuv2". After that, I changed the YAML of that device to look like this: 
+I created a new device in Home Assistant ESPHome addon (named itho_eco_fan), and chose platform "ESP8266" with board "nodemcuv2". For ESP32 select platform "ESP32" with board "esp32dev". After that, I changed the YAML of that device to look like this:
 
 **DON'T COMPILE THE SOURCE YET!** Just save the YAML config and continue!
 
 ```
 esphome:
   name: itho_eco_fan
-  platform: ESP8266
-  board: nodemcuv2
+  platform: ESP8266  # or ESP32
+  board: nodemcuv2   # or esp32dev
   includes: 
     - itho_eco_fan/itho/cc1101.h
   libraries:
@@ -543,10 +543,10 @@ void ITHOcheck() {
 ```
 Save the file and go back to your device in the Home Assistant ESPHome addon.
 
-## Flashing the NodeMCU and finishing the setup/installation
+## Flashing the ESP board and finishing the setup/installation
   1. "VALIDATE" the changes we made by clicking on the "VALIDATE" button/link. If everything is correct, Compile the code and download the BIN file.
   2. Restart Home Assistant to apply the configuration changes you made earlier.
-  3. Attach the NodeMCU device with an USB cable to your laptop and start "ESPHome Flasher" with administrator privileges.
+  3. Attach the ESP device with an USB cable to your laptop and start "ESPHome Flasher" with administrator privileges.
   4. Select the correct COM-port and select the BIN file you just created and downloaded.
   5. Flash the device.
   6. If you done everything right, your device should be up and running and connected to your WiFi network. In Home Assistant, navigate to "Settings > Integrations", your device should be found by Home Assistant. Click "Configure" and couple the device to Home Assistant (It will ask for the password you choose for the "API section" in the ESPHome device YAML).
